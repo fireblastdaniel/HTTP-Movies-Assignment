@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useRouteMatch } from 'react-router-dom';
 import MovieCard from './MovieCard';
 
-function Movie({ addToSavedList }) {
+const Movie = (props, { addToSavedList }) => {
   const [movie, setMovie] = useState(null);
   const match = useRouteMatch();
 
@@ -33,6 +34,12 @@ function Movie({ addToSavedList }) {
       <div className='save-button' onClick={saveMovie}>
         Save
       </div>
+
+      <Link to={`/update-movie/${match.params.id}`}>
+        <div className='update-button' onClick={() => props.setMovieToEdit(movie)}>
+          Update
+        </div>
+      </Link>
     </div>
   );
 }
